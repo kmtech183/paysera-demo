@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "mysql://root:secret@db:3306/paysera_demo?serverVersion=8.0"
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: paysera_demo
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
