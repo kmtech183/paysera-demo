@@ -10,7 +10,8 @@ COPY . .
 
 RUN composer install --no-interaction --optimize-autoloader
 
-RUN chown -R www-data:www-data /var/www/var
+#RUN chown -R www-data:www-data /var/www/var
+RUN mkdir -p /var/www/var && chown -R www-data:www-data /var/www/var
 
 # # Add at the bottom of Dockerfile
 # COPY docker/entrypoint.sh /entrypoint.sh
