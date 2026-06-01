@@ -9,6 +9,7 @@ services:
       - db
     environment:
       DATABASE_URL: "mysql://root:secret@db:3306/paysera_demo?serverVersion=8.0"
+      DEFAULT_URI: http://localhost:8080
 
   nginx:
     image: nginx:alpine
