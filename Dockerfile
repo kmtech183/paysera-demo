@@ -8,6 +8,8 @@ WORKDIR /var/www
 
 COPY . .
 
+RUN composer install --no-interaction --optimize-autoloader
+
 RUN chown -R www-data:www-data /var/www/var
 
 # # Add at the bottom of Dockerfile
